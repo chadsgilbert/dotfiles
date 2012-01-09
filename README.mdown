@@ -1,0 +1,7 @@
+README
+======
+
+These are basic configuration files (dotfiles) used by me on my macbook to
+keep my command line and vim running how I like.
+
+I find myself using a strange mac or screwing up this or that file on occasion, so I've included a script that automatically removes any defaut dotfiles from the current user's hime and replaces them with links to my preferred dotfiles.

@@ -1,0 +1,24 @@
+# PATH
+PATH=$PATH:$HOME/bin				# For user-defined scripts.
+PATH=$PATH:/Data/bin				# For local shared scripts.
+PATH=$PATH:/usr/local/MATLAB/R2010b/bin		# To start up MATLAB
+PATH=$PATH:/home/user/SADMU-AE_5002/frontend	
+PATH=$PATH:/usr/local/apache-maven-3.0.3/bin
+PATH=$PATH:/home/user/SIMDIS/bin/amd64-linux
+
+# CLASSPATH (for java classes).
+CLASSPATH=$CLASSPATH:/Data/java
+CLASASPTH=$CLASSPATH:/Data/java/protobuf-java-2.3.0.jar
+
+# JAVA_HOME
+JAVA_HOME=$JAVA_HOME:/usr/java/jdk1.7.0_01
+
+# LD_LIBRARY PATH (for C++ shared objects).
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./
+
+
+export PATH
+export CLASSPATH
+export JAVA_HOME
+export LD_LIBRARY_PATH

@@ -1,0 +1,13 @@
+[user]
+	name = chad
+	email = chad.gilbert@forces.gc.ca
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
+[alias]
+	tree = log --graph --decorate --pretty=oneline --abbrev-commit --all

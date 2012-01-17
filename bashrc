@@ -30,7 +30,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Include the bash aliases, exports, etc.
-for file in aliases exports exports_secret; do
+for file in aliases exports exports_private; do
 	if [ -f ~/.$file ]; then
     		. ~/.$file
 	fi
@@ -53,8 +53,8 @@ __git_ps1 ()
 		printf "(%s)" "${b##refs/heads/}";
 	fi
 }
-GRN="\[\033[0;32m\]"
-YLW="\[\033[0;33m\]"
-RED="\[\033[0;31m\]"
-BLK="\[\033[0;37m\]"
-export PS1="$RED\u@\h:$YLW\w$GRN\$(__git_ps1) `tput sgr0`$ "
+GRN=$(tput setf 2)  #"\[\033[0;32m\]"
+YLW=$(tput setf 6)  #"\[\033[0;33m\]"
+RED=$(tput setf 4)  #"\[\033[0;31m\]"
+DEF=$(tput sgr 0)   #"\[\033[0;37m\]"
+export PS1="\[$RED\]\u@\h:\[$YLW\]\w\[$GRN\]\$(__git_ps1)\[$DEF\]$ "

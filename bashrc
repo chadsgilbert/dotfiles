@@ -44,7 +44,7 @@ fi
 
 # Include the bash aliases, exports, etc.
 for file in aliases exports exports_secret; do
-	if [ -f ~/.bash_aliases ]; then
+	if [ -f ~/.$file ]; then
     		. ~/.$file
 	fi
 done

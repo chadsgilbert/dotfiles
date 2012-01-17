@@ -2,25 +2,15 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-echo "Sourcing bashrc"
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# ... or force ignoredups and ignorespace
-HISTCONTROL=ignoredups:ignorespace
+HISTCONTROL=ignoredups:ignorespace	# Don't duplicate history.
+shopt -s histappend	# Append to history file; don't overrwrite.
+HISTSIZE=2000		# See bash(1) for details.
+HISTFILESIZE=4000	# Same.
 
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
+shopt -s checkwinsize	# Update window size after each command.
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -34,9 +24,6 @@ fi
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -49,17 +36,16 @@ for file in aliases exports exports_secret; do
 	fi
 done
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+# enable programmable completion features.
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# MATLAB-like history search
+# Use a MATLAB-like history search
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
+# Customize the prompt color.
 __git_ps1 ()
 {
 	local b="$(git symbolic-ref HEAD 2>/dev/null)";
@@ -70,5 +56,5 @@ __git_ps1 ()
 GRN="\[\033[0;32m\]"
 YLW="\[\033[0;33m\]"
 RED="\[\033[0;31m\]"
-WHT="\[\033[1;37m\]"
-export PS1="$RED\u@\h:$YLW\w$GRN\$(__git_ps1)$ $WHT"
+BLK="\[\033[0;37m\]"
+export PS1="$RED\u@\h:$YLW\w$GRN\$(__git_ps1) `tput sgr0`$ "

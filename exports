@@ -17,8 +17,14 @@ JAVA_HOME=$JAVA_HOME:/usr/java/jdk1.7.0_01
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./
 
+# A few special paths that I use sometimes.
+DOCS=/Data/Documents
+PROJ=/Data/projects
 
+# Exports.
 export PATH
 export CLASSPATH
 export JAVA_HOME
 export LD_LIBRARY_PATH
+export DOCS
+export PROJ

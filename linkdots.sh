@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Confirm with user that this is acceptable.
-for file in aliases bash_profile bashrc exports exports_private gitconfig; do
+for file in aliases bash_profile bashrc exports exports_private gitconfig gitignore_global; do
 	if [ -L ~/.$file ]; then
 		rm ~/.$file
 	elif [ -f ~/.$file ]; then
@@ -11,4 +11,5 @@ for file in aliases bash_profile bashrc exports exports_private gitconfig; do
 	fi
 	cp -v ./$file ~/.$file
 done
+git config --global core.excludesfile ~/.gitignore_global
 echo "Your dotfiles are now up-to-date."

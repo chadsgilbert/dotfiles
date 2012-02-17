@@ -3,3 +3,5 @@ README
 
 These are basic configuration files (dotfiles) used by me on my ubuntu machine
  to keep my command line and vim running how I like.
+
+This release works on my Ubuntu 10.04 machine.

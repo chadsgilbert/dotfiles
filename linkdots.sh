@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Confirm with user that this is acceptable.
-for file in aliases bash_profile bashrc exports exports_secret gitconfig; do
+for file in aliases bash_profile bashrc exports exports_private gitconfig; do
 	if [ -L ~/.$file ]; then
 		rm ~/.$file
 	elif [ -f ~/.$file ]; then

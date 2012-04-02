@@ -5,13 +5,14 @@ PATH=$PATH:/usr/local/MATLAB/R2010b/bin		# To start up MATLAB
 PATH=$PATH:/home/user/SADMU-AE_5002/frontend	
 PATH=$PATH:/usr/local/apache-maven-3.0.3/bin
 PATH=$PATH:/home/user/SIMDIS/bin/amd64-linux
+PATH=$PATH:/Data/tools/ditaa-markdown
 
 # CLASSPATH (for java classes).
 CLASSPATH=$CLASSPATH:/Data/java
 CLASASPTH=$CLASSPATH:/Data/java/protobuf-java-2.3.0.jar
 
 # JAVA_HOME
-JAVA_HOME=$JAVA_HOME:/usr/java/jdk1.7.0_01
+JAVA_HOME=$JAVA_HOME:/usr/bin/java:/home/user/jre1.6.0_31/bin/java
 
 # LD_LIBRARY PATH (for C++ shared objects).
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib

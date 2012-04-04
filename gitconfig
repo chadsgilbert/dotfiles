@@ -2,12 +2,17 @@
 	name = chad
 	email = chad.gilbert@forces.gc.ca
 [color]
-	diff = auto
+    diff   = auto
 	status = auto
 	branch = auto
 [core]
 	editor = vim
 [merge]
-	tool = vimdiff
+	tool = meld
+[diff]
+    tool = meld
+[difftool "meld"]
+    cmd = /usr/bin/meld "$LOCAL" "$REMOTE"
+    prompt = false
 [alias]
 	tree = log --graph --decorate --pretty=oneline --abbrev-commit --all

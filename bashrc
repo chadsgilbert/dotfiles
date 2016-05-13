@@ -2,15 +2,21 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# If not running interactively, don't do anything
-[ -z "$PS1" ] && return
 
-HISTCONTROL=ignoredups:ignorespace	# Don't duplicate history.
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+HISTCONTROL=ignoreboth	# Don't duplicate history.
 shopt -s histappend	# Append to history file; don't overrwrite.
 HISTSIZE=2000		# See bash(1) for details.
 HISTFILESIZE=4000	# Same.
 
 shopt -s checkwinsize	# Update window size after each command.
+
+shopt -s globstar	# Make "**" match stuff.
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -19,6 +25,21 @@ shopt -s checkwinsize	# Update window size after each command.
 if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
+
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+if [ "$color_prompt" = yes ]; then
+    GRN="\[\033[0;32m\]"
+    YLW="\[\033[0;33m\]"
+    RED="\[\033[0;31m\]"
+    DEF="\[\033[0;37m\]"
+    export PS1="\n$RED\u@\h:$YLW\w$GRN\$(__git_ps1)\n$DEF$ "
+else
+    PS1="\n\u@\h:\w\$(__git_ps1)\n$ "
+fi
+unset color_prompt force_color_prompt
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -31,9 +52,9 @@ fi
 
 # Include the bash aliases, exports, etc.
 for file in aliases exports exports_secret; do
-	if [ -f ~/.$file ]; then
-    		. ~/.$file
-	fi
+    if [ -f ~/.$file ]; then
+        . ~/.$file
+    fi
 done
 
 # enable programmable completion features.
@@ -45,6 +66,8 @@ fi
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
+force_color_prompt=yes
+
 # Customize the prompt color.
 __git_ps1 ()
 {
@@ -53,8 +76,4 @@ __git_ps1 ()
 		printf "(%s)" "${b##refs/heads/}";
 	fi
 }
-GRN=$(tput setf 2)  #"\[\033[0;32m\]"
-YLW=$(tput setf 6)  #"\[\033[0;33m\]"
-RED=$(tput setf 4)  #"\[\033[0;31m\]"
-DEF=$(tput sgr 0)   #"\[\033[0;37m\]"
-export PS1="\n\[$RED\]\u@\h:\[$YLW\]\w\[$GRN\]\$(__git_ps1)\n\[$DEF\]$ "
+

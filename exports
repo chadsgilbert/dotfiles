@@ -3,12 +3,8 @@ if [ -d $HOME/bin ]; then
     PATH=$PATH:$HOME/bin
 fi
 
-# JAVA_HOME
-JAVA_HOME=$JAVA_HOME:/usr/bin/java
-
 # LD_LIBRARY PATH (for C++ shared objects).
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
 export PATH
-export JAVA_HOME
 export LD_LIBRARY_PATH

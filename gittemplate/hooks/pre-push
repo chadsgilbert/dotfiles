@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# A hook script to ensure that a push can only occur if the current commit in
+# _all_ submodules has been pushed a remote repository. It is assumed that
+# each submodule's origin points to a "central" repository where other potential
+# users of this repository will have accecss.
+#
+# The Cardinal Sin of submodules is committed when you push a commit in the
+# main project, but leave the submodule commit that it depends on it your
+# local repository. When others check out your work, it is impossible for them
+# to get your submodules.
+#
+# This script prevents that from happening by calling you a doodoo head whenever
+# you try it. And you will. Oh, even when you understand this, you will forget
+# eventually. Doodoo head.
+#
+# This hook is called with the following parameters:
+#
+# $1 -- Name of the remote to which the push is being done
+# $2 -- URL to which the push is being done
+#
+# If pushing without using a named remote those arguments will be equal.
+#
+# Information about the commits which are being pushed is supplied as lines to
+# the standard input in the form:
+#
+#   <local ref> <local sha1> <remote ref> <remote sha1>
+#
+# This sample shows how to prevent push of commits where the log message starts
+# with "WIP" (work in progress).
+
+# If there are no gitmodules, then return 0; client can push.
+# If there are gitmodules, read all the paths in the file;
+#   For each path in the file, use git branch --contains to check all
+#   remotes for the current local commit (HEAD). If origin has the HEAD
+#   commit, then that submodule is pushed and we're good to go. Otherwise,
+#   we aren't. If we aren't, warn the user that the submodule must be pushed
+#   first and then increment the count of "invalid" submodules.
+# Return numinvalid -- if it is greater than zero, git will reject the push.
+# Just what we wanted!
+
+# Risky assumptions:
+#  * the correct remote is always "origin". By convention that *should* be the case.
+#  * each submodule has this hook installed, too. If not, then subsubmodules
+#    are not protected from the Cardinal Sin.
+
+numinvalid=0
+if [ -f .gitmodules ];
+then
+    dirs=`grep path .gitmodules | sed 's/\W*path\W*=\W*\(.*\)/\1/'`;
+    while read -r dir; 
+    do
+        remotes=$(pushd $dir && git branch -r --contains `git rev-parse HEAD` && popd)
+        if [[ $remotes =~ .*origin.* ]]; then
+            echo "hook:pre-push     Submodule \"$dir\" is up to date."
+        else
+            echo "hook:pre-push     Submodule \"$dir\" must be pushed!"
+            ((numinvalid++))
+        fi
+    done <<< "$dirs";
+fi
+exit $numinvalid
+

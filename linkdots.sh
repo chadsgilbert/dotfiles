@@ -18,4 +18,11 @@ else
     cp -r vim $HOME/.vim
 fi
 
+if [ -d $HOME/.gittemplate ]; then
+    cp -r gittemplate/* $HOME/.gittemplate/
+else
+    cp -r gittemplate $HOME/gittemplate
+fi
+git config --global init.templatedir=$HOME/.gittemplate
+
 echo "Your dotfiles are now up-to-date."

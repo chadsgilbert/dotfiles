@@ -16,3 +16,5 @@
     prompt = false
 [alias]
     tree = log --graph --decorate --pretty=oneline --abbrev-commit --all
+[init]
+    templatedir=~/.gittemplate

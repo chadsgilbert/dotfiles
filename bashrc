@@ -53,8 +53,8 @@ __git_ps1 ()
 		printf "(%s)" "${b##refs/heads/}";
 	fi
 }
-GRN=$(tput setf 2)  #"\[\033[0;32m\]"
-YLW=$(tput setf 6)  #"\[\033[0;33m\]"
-RED=$(tput setf 4)  #"\[\033[0;31m\]"
-DEF=$(tput sgr 0)   #"\[\033[0;37m\]"
+GRN="\033[0;32m"
+YLW="\033[0;33m"
+RED="\033[0;31m"
+DEF="\033[0;37m"
 export PS1="\n\[$RED\]\u@\h:\[$YLW\]\w\[$GRN\]\$(__git_ps1)\n\[$DEF\]$ "

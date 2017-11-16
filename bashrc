@@ -77,3 +77,9 @@ __git_ps1 ()
 	fi
 }
 
+# For SADM
+ulimit -s unlimited
+
+# Remap capslock and escape for ergonomics.
+setxkbmap -option caps:swapescape
+

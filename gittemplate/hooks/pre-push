@@ -3,7 +3,7 @@
 # A hook script to ensure that a push can only occur if the current commit in
 # _all_ submodules has been pushed a remote repository. It is assumed that
 # each submodule's origin points to a "central" repository where other potential
-# users of this repository will have accecss.
+# users of this repository will have access.
 #
 # The Cardinal Sin of submodules is committed when you push a commit in the
 # main project, but leave the submodule commit that it depends on it your
@@ -36,12 +36,12 @@
 #   commit, then that submodule is pushed and we're good to go. Otherwise,
 #   we aren't. If we aren't, warn the user that the submodule must be pushed
 #   first and then increment the count of "invalid" submodules.
-# Return numinvalid -- if it is greater than zero, git will reject the push.
+# Return `numinvalid` -- if it is greater than zero, git will reject the push.
 # Just what we wanted!
 
 # Risky assumptions:
 #  * the correct remote is always "origin". By convention that *should* be the case.
-#  * each submodule has this hook installed, too. If not, then subsubmodules
+#  * each submodule has this hook installed, too. If not, then sub-submodules
 #    are not protected from the Cardinal Sin.
 
 numinvalid=0

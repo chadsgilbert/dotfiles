@@ -2,28 +2,28 @@
 set nocompatible 
 filetype off
 
+if !isdirectory("$HOME/.vim/bundle/Vundle.vim/.git")
+	exec "!git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim"
+endif
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'python-mode/python-mode'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'rhysd/vim-clang-format'
+call vundle#end()
+filetype plugin indent on
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-syntax on			" Enable syntax highlighting.
-filetype on			" Enable filetype detection.
+syntax on
 
 set textwidth=80		" Set defulat text width to 80 chars.
+set colorcolumn=+1
 set fo=lbr		" fo specifies default formatting options.
-	" t - auto-wrap text
-	" c - auto-wrap comments
-	" r - auto-insert the current comment leader
-	" q - allow formatting of comments.
 set linebreak
 set number      " Show line numbers by default.
 set ruler       " Show the cursor position by default.
@@ -38,16 +38,13 @@ set hidden      " Allow vim to manage multiple buffers effectively.
 set spelllang=en
 set background=dark
 
-let colorcolumn=join(range(100,999),",")
-highlight ColorColumn ctermbg=1 guibg=lightgrey
-
 " Useful tab completion.
 set wildmenu
 set wildmode=list:longest
 
-set visualbell  " I never have my sound turned on, anyway...
+set visualbell
 
-" Allow me to move along displayed lines instead of physical lines.
+" Move along displayed lines instead of physical lines.
 noremap <buffer> <silent> k gk
 noremap <buffer> <silent> j gj
 noremap <buffer> <silent> 0 g0
@@ -55,8 +52,8 @@ noremap <buffer> <silent> $ g$
 noremap <buffer> <silent> <Down> gj
 noremap <buffer> <silent> <Up> gk
 
-" Switch between .h and .cpp files wiht F4.
-noremap <F4> :find %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
-
 " Make find useful.
 set path+=**
+
+" YouCompleteMe makes annoying prompts otherwise.
+let g:ycm_confirm_extra_conf=0

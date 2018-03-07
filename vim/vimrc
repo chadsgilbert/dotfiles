@@ -2,10 +2,6 @@
 set nocompatible 
 filetype off
 
-if !isdirectory("$HOME/.vim/bundle/Vundle.vim/.git")
-	exec "!git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim"
-endif
-
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -16,6 +12,7 @@ Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'python-mode/python-mode'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'rhysd/vim-clang-format'
+Plugin 'pboettch/vim-cmake-syntax'
 call vundle#end()
 filetype plugin indent on
 

@@ -4,6 +4,12 @@ filetype off
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/nerdtree
+
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
+
+"set rtp+=~/.local/lib/python-3.7/site-packages/powerline/bindings/vim
 " Plugin 'vim-pandoc/vim-pandoc'
 "Plugin 'vim-pandoc/vim-pandoc-syntax'
 "Plugin 'python-mode/python-mode'

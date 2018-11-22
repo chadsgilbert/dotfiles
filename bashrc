@@ -80,3 +80,12 @@ __git_ps1 ()
 # tmuxinator wants this. 
 export EDITOR=vim
 alias mux=tmuxinator
+
+# Add support for powerline if it is installed.
+if [ -f `which powerline-daemon > /dev/null 2>&1` ]; then
+	powerline-daemon -q
+	POWERLINE_BASH_CONTINUATION=1
+	POWERLINE_BASH_SELECT=1
+	. $HOME/.local/lib/python3.7/site-packages/powerline/bindings/bash/powerline.sh
+fi
+

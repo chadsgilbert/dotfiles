@@ -2,29 +2,28 @@
 
 mkdir -p $HOME/bin;
 cp scripts/* $HOME/bin
-
+echo $(dirname $(realpath "$0"))
 # Confirm with user that this is acceptable.
-for file in aliases bash_profile bashrc exports exports_private gitconfig clang-format; do
-    if [ -L ~/.$file ]; then
-        rm ~/.$file
-    elif [ -f ~/.$file ]; then
-        mv ~/.$file ~/.$file.old
-    elif [ -d ~/.$file ]; then
-        mv -rf ~/.$file ~/.$file.old
+for file in aliases bashrc exports exports_private gitconfig clang-format tmux.conf; do
+    if [ -L $HOME/.$file ]; then
+        rm $HOME/.$file
+    elif [ -f $HOME/.$file ]; then
+        rm -i $HOME/.$file
+    elif [ -d $HOME/.$file ]; then
+        rm -rfi $HOME/.$file
     fi
-    cp -v ./$file ~/.$file
+    ln -s $(dirname $(realpath "$0"))/$file $HOME/.$file
 done
 
 if [ -d $HOME/.vim ]; then
-    cp -r vim/* $HOME/.vim/
-else
-    cp -r vim $HOME/.vim
+    rm -rfi $HOME/.vim
 fi
+ln -s $(dirname $(realpath "$0"))/vim $HOME/.vim
 
 if [ -d $HOME/.gittemplate ]; then
-    cp -r gittemplate/* $HOME/.gittemplate/
+    rm -rfi $HOME/.gittemplate
 else
-    cp -r gittemplate $HOME/.gittemplate
+	ln -s $(dirname $(realpath "$0"))/gittemplate $HOME/.gittemplate
 fi
 
 echo "Your dotfiles are now up-to-date."

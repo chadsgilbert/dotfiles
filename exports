@@ -1,6 +1,6 @@
 # PATH
 if [ -d $HOME/bin ]; then
-    PATH=$PATH:$HOME/bin
+    PATH=$PATH:$HOME/bin:$HOME/.local/bin
 fi
 
 # LD_LIBRARY PATH (for C++ shared objects).

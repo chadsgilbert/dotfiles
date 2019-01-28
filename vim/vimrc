@@ -4,6 +4,7 @@ filetype off
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/nerdtree
+set rtp+=~/projects/ale
 
 python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()

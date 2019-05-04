@@ -53,12 +53,14 @@ fi
 # Include the bash aliases, exports, etc.
 for file in aliases exports exports_secret; do
     if [ -f ~/.$file ]; then
-        . ~/.$file
+        . $HOME/.$file
     fi
 done
 
 # enable programmable completion features.
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+	. /usr/share/bash-completion/bash_completion
+elif [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 

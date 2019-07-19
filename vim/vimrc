@@ -5,18 +5,13 @@ filetype off
 " set the runtime path to include Vundle and initialize
 set rtp+=$HOME/.vim/bundle/nerdtree
 set rtp+=$HOME/.vim/bundle/ale
+set rtp+=$HOME/projects/vim-virtualenv
+set rtp+=$HOME/projects/vim-pipenv
 
 python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
 python3 del powerline_setup
 
-"set rtp+=~/.local/lib/python-3.7/site-packages/powerline/bindings/vim
-" Plugin 'vim-pandoc/vim-pandoc'
-"Plugin 'vim-pandoc/vim-pandoc-syntax'
-"Plugin 'python-mode/python-mode'
-"Plugin 'Valloric/YouCompleteMe'
-"Plugin 'rhysd/vim-clang-format'
-"Plugin 'pboettch/vim-cmake-syntax'
 filetype plugin indent on
 
 syntax on
@@ -55,5 +50,5 @@ noremap <buffer> <silent> <Up> gk
 " Make find useful.
 set path+=**
 
-" YouCompleteMe makes annoying prompts otherwise.
-let g:ycm_confirm_extra_conf=0
+" Use ALE's completion.
+let g:ale_completion_enabled=1

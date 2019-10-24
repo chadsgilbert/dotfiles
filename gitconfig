@@ -1,6 +1,7 @@
 [user]
     name = Chad Gilbert
 	email = chad.s.gilbert@gmail.com
+	signingkey = 32A1CBECAC3B6DD541BAEBEF00CF738C9BB8224A
 [color]
     diff   = auto
     status = auto

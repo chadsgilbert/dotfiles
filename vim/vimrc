@@ -8,10 +8,6 @@ set rtp+=$HOME/.vim/bundle/ale
 set rtp+=$HOME/projects/vim-virtualenv
 set rtp+=$HOME/projects/vim-pipenv
 
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
-
 filetype plugin indent on
 
 syntax on
@@ -46,6 +42,10 @@ noremap <buffer> <silent> 0 g0
 noremap <buffer> <silent> $ g$
 noremap <buffer> <silent> <Down> gj
 noremap <buffer> <silent> <Up> gk
+
+" Make it easy to get to the vimrc and re-source the config.
+nnoremap <leader>r :source $MYVIMRC<cr>
+nnoremap <leader>e :edit $MYVIMRC<cr>
 
 " Make find useful.
 set path+=**

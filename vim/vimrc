@@ -7,6 +7,7 @@ set rtp+=$HOME/.vim/bundle/nerdtree
 set rtp+=$HOME/.vim/bundle/ale
 set rtp+=$HOME/projects/vim-virtualenv
 set rtp+=$HOME/projects/vim-pipenv
+set rtp+=$HOME/.vim/bundle/airline
 
 filetype plugin indent on
 
@@ -52,3 +53,5 @@ set path+=**
 
 " Use ALE's completion.
 let g:ale_completion_enabled=1
+
+let g:airline_powerline_fonts = 1

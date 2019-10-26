@@ -26,6 +26,11 @@ if [ -d "$HOME/.vim" ]; then
 fi
 ln -s "$dfdir/vim" "$HOME/.vim"
 
+if [ -d "$HOME/.tmux-powerline" ]; then
+	rm -rfi "$HOME/.tmux-powerline"
+fi
+ln -s "$dfdir/tmux-powerline" "$HOME/.tmux-powerline"
+
 if [ -d "$HOME/.gittemplate" ]; then
     rm -rfi "$HOME/.gittemplate"
 else

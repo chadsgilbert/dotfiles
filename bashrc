@@ -30,15 +30,32 @@ case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
+# Customize the prompt color.
+
 if [ "$color_prompt" = yes ]; then
-    GRN="\[\033[0;32m\]"
-    YLW="\[\033[0;33m\]"
-    RED="\[\033[0;31m\]"
-    DEF="\[\033[0;37m\]"
-    export PS1="\n$RED\u@\h:$YLW\w$GRN\$(__git_ps1)\n$DEF$ "
+	declare -a TRUELINE_SEGMENTS=(
+        'user,black,white,bold'
+        'venv,black,purple,bold'
+        'git,grey,special_grey,normal'
+        'working_dir,mono,cursor_grey,normal'
+        'read_only,black,orange,bold'
+        'bg_jobs,black,orange,bold'
+        'exit_status,black,red,bold'
+        'newline,black,orange,bold'
+    	)
+
+	source $(dirname $(realpath $BASH_SOURCE))/trueline/trueline.sh
 else
-    PS1="\n\u@\h:\w\$(__git_ps1)\n$ "
+	__git_ps1 ()
+	{
+		local b="$(git symbolic-ref HEAD 2>/dev/null)";
+		if [ -n "$b" ]; then
+			printf "(%s)" "${b##refs/heads/}";
+		fi
+	}
+	PS1="\n\u@\h:\w\$(__git_ps1)\n$ "
 fi
+
 unset color_prompt force_color_prompt
 
 # enable color support of ls and also add handy aliases
@@ -70,14 +87,7 @@ bind '"\e[B": history-search-forward'
 
 force_color_prompt=yes
 
-# Customize the prompt color.
-__git_ps1 ()
-{
-	local b="$(git symbolic-ref HEAD 2>/dev/null)";
-	if [ -n "$b" ]; then
-		printf "(%s)" "${b##refs/heads/}";
-	fi
-}
+
 
 # tmuxinator wants this. 
 export EDITOR=vim

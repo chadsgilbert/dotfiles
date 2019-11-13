@@ -9,6 +9,8 @@ case $- in
       *) return;;
 esac
 
+[ -z "$TMUX" ] && { tmux attach || exec tmux new-session && exit; }
+
 HISTCONTROL=ignoreboth	# Don't duplicate history.
 shopt -s histappend	# Append to history file; don't overrwrite.
 HISTSIZE=2000		# See bash(1) for details.
@@ -31,7 +33,6 @@ case "$TERM" in
 esac
 
 # Customize the prompt color.
-
 if [ "$color_prompt" = yes ]; then
 	declare -a TRUELINE_SEGMENTS=(
         'user,black,white,bold'
@@ -44,7 +45,29 @@ if [ "$color_prompt" = yes ]; then
         'newline,black,orange,bold'
     	)
 
-	source $(dirname $(realpath $BASH_SOURCE))/trueline/trueline.sh
+	declare -A TRUELINE_SYMBOLS=(
+    [bg_jobs]=''
+    [git_ahead]=''
+    [git_behind]=''
+    [git_bitbucket]=''
+    [git_branch]=''
+    [git_github]=''
+    [git_gitlab]=''
+    [git_modified]='✚'
+    [newline]='  '
+    [newline_root]='  '
+    [ps2]='...'
+    [read_only]=''
+    [segment_separator]=''
+    [ssh]=''
+    [venv]=''
+    [vimode_cmd]='N'
+    [vimode_ins]='I'
+    [working_dir_folder]=''
+    [working_dir_home]=''
+    [working_dir_separator]=''
+	)
+	source "$(dirname $(realpath "$BASH_SOURCE"))/trueline/trueline.sh"
 else
 	__git_ps1 ()
 	{
@@ -56,7 +79,7 @@ else
 	PS1="\n\u@\h:\w\$(__git_ps1)\n$ "
 fi
 
-unset color_prompt force_color_prompt
+unset color_prompt
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -85,13 +108,9 @@ fi
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
-force_color_prompt=yes
-
-
 
 # tmuxinator wants this. 
 export EDITOR=vim
-alias mux=tmuxinator
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

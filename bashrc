@@ -128,4 +128,5 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 export GPGKEY=3FAF28AD8D32CD749D02435C3FC6E7CE623D9B6F
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
